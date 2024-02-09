@@ -46,21 +46,23 @@ int main(void) {
       continue;
 
     switch (event.type) {
-    case ENET_EVENT_TYPE_CONNECT: {} break;
+    case ENET_EVENT_TYPE_CONNECT: break;
 
     case ENET_EVENT_TYPE_RECEIVE: {
       INFO("%s\n", (char *) event.packet->data);
       enet_packet_destroy(event.packet);
+      goto end;
     } break;
 
-    case ENET_EVENT_TYPE_DISCONNECT: {} break;
+    case ENET_EVENT_TYPE_DISCONNECT: break;
 
-    case ENET_EVENT_TYPE_NONE: {} break;
+    case ENET_EVENT_TYPE_NONE: break;
     }
 
     sleep(0.05);
   }
 
+ end:
   enet_host_destroy(client);
   enet_deinitialize();
   return 0;
